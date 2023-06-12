@@ -3,8 +3,8 @@
 
 
 # Imports
-from os import environ
 import asyncio
+from os import environ
 
 from discord import Intents
 from discord.ext import commands
