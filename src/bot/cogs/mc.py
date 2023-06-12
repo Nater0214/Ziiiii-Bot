@@ -27,7 +27,7 @@ class Minecraft(commands.Cog):
         
         # Start the server
         if server == "blox-smp":
-            subprocess.run(["/var/mc-servers/blox_smp_1/start.sh", "y"])
+            subprocess.run(["/var/mc-servers/blox_smp_1/run.sh", "y"])
     
     
     @commands.slash_command(help="Lists all minecraft servers")
