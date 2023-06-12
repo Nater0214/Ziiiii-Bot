@@ -48,7 +48,7 @@ class Minecraft(commands.Cog):
     
     
     @commands.slash_command(help="Lists all minecraft servers")
-    async def listmc(self, interaction: Interaction):
+    async def listmc_(self, interaction: Interaction):
         """Lists all minecraft servers"""
         
         await interaction.response.send_message("All Minecraft Servers:\n `blox-smp`: The Blox SMP\nThats it lol")
