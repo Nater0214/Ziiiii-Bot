@@ -5,6 +5,7 @@
 # Imports
 from discord import Interaction
 from discord.ext import commands
+import subprocess
 
 
 # Definitions
@@ -21,4 +22,16 @@ class Minecraft(commands.Cog):
             await interaction.response.send_message("Invalid server name")
             return
         
+        # Send status message
         await interaction.response.send_message(f"Starting minecraft server {server}...")
+        
+        # Start the server
+        if server == "blox-smp":
+            subprocess.run(["/var/mc-servers/blox_smp_1/start.sh", "y"])
+    
+    
+    @commands.slash_command(help="Lists all minecraft servers")
+    async def listmc(self, interaction: Interaction):
+        """Lists all minecraft servers"""
+        
+        await interaction.response.send_message("All Minecraft Servers:\n `blox-smp`: The Blox SMP\nThats it lol")
