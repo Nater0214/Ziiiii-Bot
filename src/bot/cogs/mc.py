@@ -1,4 +1,4 @@
-# src/bot/src/cogs/mc.py
+# src/bot/cogs/mc.py
 # A cog for minecraft server commands
 
 

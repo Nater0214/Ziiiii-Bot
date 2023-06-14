@@ -1,4 +1,4 @@
-# src/bot/src/cogs/general.py
+# src/bot/cogs/general.py
 # General commands
 
 

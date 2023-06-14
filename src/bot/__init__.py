@@ -23,7 +23,7 @@ def run() -> None:
     intents.presences = False
     
     # Create bot
-    bot = commands.Bot(command_prefix="z!", intents=intents)
+    bot = commands.Bot(command_prefix="z!", intents=intents,)
     
     # Add loop event
     @bot.event
