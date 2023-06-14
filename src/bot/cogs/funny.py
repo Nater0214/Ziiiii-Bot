@@ -19,6 +19,4 @@ class Funny(commands.Cog):
     async def rkm(self, interaction: Interaction):
         """Play a random Kevin Macleod song"""
         
-        kevin = YTMusic.get_artist("UCBqb0wSlWVFBnSuTI3Tcxig")
-        
-        interaction.response.send_message(f"Here is Kevin's data:\n```{kevin}```")
+        interaction.response.send_message("Sorry I dont work yet")
