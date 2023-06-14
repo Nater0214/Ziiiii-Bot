@@ -4,8 +4,7 @@
 
 
 # Imports
-import asyncio
-
+import signal
 from dotenv import load_dotenv
 
 from src import bot
@@ -22,5 +21,9 @@ def main() -> None:
 
 # Run
 if __name__ == "__main__":
+    # Add kill signals
+    signal.signal(signal.SIGINT, exit)
+    signal.signal(signal.SIGTERM, exit)
+    
     main()
     exit(0)

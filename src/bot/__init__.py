@@ -3,7 +3,6 @@
 
 
 # Imports
-import asyncio
 from os import environ
 
 from discord import Intents
