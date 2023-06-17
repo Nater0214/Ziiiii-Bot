@@ -21,7 +21,6 @@ class MainLoop:
     
     
     def _loop(self):
-        while not self.terminate_flag:
-            pass
+        pass
 
 main_loop = MainLoop()
