@@ -5,14 +5,14 @@
 from threading import Thread
 
 
-class MainLoop:
+class MainLoop(Thread):
     def __init__(self):
         self.terminate_flag = False
-        self.thrd = Thread(target=self._loop)
 
     
     def __call__(self):
-        self.thrd.start()
+        super().__init__(target=self._loop)
+        self.start()
     
     
     def stop(self):
