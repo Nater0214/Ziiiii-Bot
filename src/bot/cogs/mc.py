@@ -36,7 +36,7 @@ class Minecraft(commands.Cog):
         
         # Start the server
         if server == "blox-smp":
-            multiprocessing.Process(target=start_server, args=["/var/mc-servers/blox_smp_1/run.sh", "y"]).start()
+            multiprocessing.Process(target=start_server, args=["/var/mc-servers/blox_smp_1/run.sh", "y"], daemon=True).start()
     
     
     @commands.slash_command(help="Lists all minecraft servers")
