@@ -16,7 +16,7 @@ class Minecraft(commands.Cog):
     
     # Commands
     @commands.slash_command(help="Starts a minecraft server")
-    async def startmc(self, interaction: Interaction, *, server: str):
+    async def startmc(self, interaction: Interaction, server: str = "blox-smp"):
         """Starts a minecraft server"""
         
         # Define server starting method
@@ -27,7 +27,7 @@ class Minecraft(commands.Cog):
             subprocess.Popen(command)
         
         # Check for valid server name
-        if not server in [None, "blox-smp"]:
+        if not server in ["blox-smp"]:
             await interaction.response.send_message("Invalid server name")
             return
         
@@ -35,7 +35,7 @@ class Minecraft(commands.Cog):
         await interaction.response.send_message(f"Starting minecraft server {server}...")
         
         # Start the server
-        if server in ["blox-smp", None]:
+        if server == "blox-smp":
             multiprocessing.Process(target=start_server, args=["/var/mc-servers/blox_smp_1/run.sh", "y"]).start()
     
     
