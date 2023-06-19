@@ -3,9 +3,7 @@
 
 
 # Imports
-import multiprocessing
 import subprocess
-import os
 
 from discord import Interaction
 from discord.ext import commands
@@ -20,13 +18,6 @@ class Minecraft(commands.Cog):
     async def startmc(self, interaction: Interaction, server: str = "blox-smp"):
         """Starts a minecraft server"""
         
-        # Define server starting method
-        def start_server(*command: list) -> None:
-            """Run a command to start a server"""
-            
-            # Run the command
-            exec(["nohup", *command, ">", "/dev/null", "&"])
-        
         # Check for valid server name
         if not server in ["blox-smp"]:
             await interaction.response.send_message("Invalid server name")
@@ -37,7 +28,8 @@ class Minecraft(commands.Cog):
         
         # Start the server
         if server == "blox-smp":
-            os.spawnl(os.P_NOWAIT, "/var/mc-servers/blox_smp_1/run.sh", 'y')
+            # Thanks Barmar
+            subprocess.Popen(["/var/mc-servers/blox_smp_1/run.sh", "y"], start_new_session=True)
     
     
     @commands.slash_command(help="Lists all minecraft servers")
