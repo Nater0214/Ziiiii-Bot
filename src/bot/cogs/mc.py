@@ -5,6 +5,7 @@
 # Imports
 import multiprocessing
 import subprocess
+import os
 
 from discord import Interaction
 from discord.ext import commands
@@ -24,7 +25,7 @@ class Minecraft(commands.Cog):
             """Run a command to start a server"""
             
             # Run the command
-            subprocess.Popen(["nohup", *command, ">", "/dev/null", "&"])
+            exec(["nohup", *command, ">", "/dev/null", "&"])
         
         # Check for valid server name
         if not server in ["blox-smp"]:
@@ -36,7 +37,7 @@ class Minecraft(commands.Cog):
         
         # Start the server
         if server == "blox-smp":
-            multiprocessing.Process(target=start_server, args=["/var/mc-servers/blox_smp_1/run.sh", "y"], daemon=True).start()
+            os.spawnl(os.P_DETACH, "/var/mc-servers/blox_smp_1/run.sh", 'y')
     
     
     @commands.slash_command(help="Lists all minecraft servers")
