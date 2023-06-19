@@ -5,9 +5,6 @@
 # Imports
 from discord import Interaction
 from discord.ext import commands
-from ytmusicapi import ytmusic
-
-YTMusic = ytmusic.YTMusic()
 
 
 # Definitions
