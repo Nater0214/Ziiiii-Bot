@@ -37,7 +37,7 @@ class Minecraft(commands.Cog):
         
         # Start the server
         if server == "blox-smp":
-            os.spawnl(os.P_DETACH, "/var/mc-servers/blox_smp_1/run.sh", 'y')
+            os.spawnl(os.P_NOWAIT, "/var/mc-servers/blox_smp_1/run.sh", 'y')
     
     
     @commands.slash_command(help="Lists all minecraft servers")
