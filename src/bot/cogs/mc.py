@@ -24,7 +24,7 @@ class Minecraft(commands.Cog):
             """Run a command to start a server"""
             
             # Run the command
-            subprocess.Popen(command + '&')
+            subprocess.Popen(["nohup"].extend(command).extend([">", "/dev/null", "&"]))
         
         # Check for valid server name
         if not server in ["blox-smp"]:
