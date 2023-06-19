@@ -5,6 +5,8 @@
 
 # Imports
 import signal
+import sys
+
 from dotenv import load_dotenv
 
 from src import bot
@@ -19,11 +21,17 @@ def main() -> None:
     bot.run()
 
 
+def exit_script() -> None:
+    """Exit script"""
+    
+    sys.exit(0)
+
+
 # Run
 if __name__ == "__main__":
     # Add kill signals
-    signal.signal(signal.SIGINT, exit)
-    signal.signal(signal.SIGTERM, exit)
+    signal.signal(signal.SIGINT, exit_script)
+    signal.signal(signal.SIGTERM, exit_script)
     
     main()
     exit(0)
