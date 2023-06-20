@@ -14,7 +14,7 @@ class General(commands.Cog):
     """General commands"""
     
     # Commands
-    @commands.slash_command(help="A friendly greeting")
+    @commands.slash_command(help="A friendly greeting", guild_ids=[getenv("GUILD_ID")])
     async def hello(self, interaction: Interaction):
         """Send a friendly greeting"""
         

@@ -5,8 +5,8 @@
 # Imports
 from .funny import Funny
 from .general import General
-from .mc import Minecraft
 from .kevin import Kevin
+from .mc import Minecraft
 
 
 # Definitions
