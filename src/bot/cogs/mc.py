@@ -29,7 +29,7 @@ class Minecraft(commands.Cog):
         # Start the server
         if server == "blox-smp":
             # Thanks Barmar
-            subprocess.Popen(["/var/mc-servers/blox_smp_1/run.sh", "y"], start_new_session=True)
+            subprocess.Popen(["bash", "/var/mc-servers/blox_smp_1/run.sh", "y"], start_new_session=True)
     
     
     @commands.slash_command(help="Lists all minecraft servers")
