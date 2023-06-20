@@ -3,9 +3,10 @@
 
 
 # Imports
+from os import getenv
+
 from discord import Interaction
 from discord.ext import commands
-from os import getenv
 
 
 # Definitions

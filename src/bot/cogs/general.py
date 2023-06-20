@@ -3,6 +3,7 @@
 
 
 # Imports
+from os import getenv
 from random import choice
 
 from discord import Interaction

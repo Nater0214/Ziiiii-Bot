@@ -3,6 +3,7 @@
 
 
 # Imports
+from os import getenv
 import subprocess
 
 from discord import Interaction
