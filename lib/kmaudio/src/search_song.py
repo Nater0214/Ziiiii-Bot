@@ -8,7 +8,7 @@ from selenium.webdriver.common.by import By
 
 
 # Definitions
-class GetAudio:
+class SearchSong:
     """Holding stuff"""
     
     # Init
@@ -41,4 +41,4 @@ class GetAudio:
         # Return song names
         return song_names
 
-get_audio = GetAudio()
+search_song = SearchSong()
