@@ -17,8 +17,8 @@ class SearchSong:
         
         # Initialize webdriver
         options = webdriver.firefox.options.Options()
-        for a in ['-headless']: options.add_argument(a)
-        self.driver = webdriver.Firefox(options=options)
+        # for a in []: options.add_argument(a)
+        self.driver = webdriver.Firefox()
     
     def __call__(self, query: str):
         """Get a Kevin audio by a search query"""
