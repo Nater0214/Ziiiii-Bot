@@ -34,7 +34,8 @@ class Kevin(commands.Cog):
         
         query_results = kmaudio.search_song(query)
         if len(query_results) > 1:
-            ctx.reply(f"I found {len(query_results)} songs:\n{'\n'.join([f'{num}. {song}' for num, song in enumerate(query_results)])}")
+            lf = '\n'
+            ctx.reply(f"I found {len(query_results)} songs:{lf}{lf.join([f'{num}. {song}' for num, song in enumerate(query_results)])}")
         elif len(query_results) == 1:
             ctx.reply(f"I found {query_results[0]}")
         else:
