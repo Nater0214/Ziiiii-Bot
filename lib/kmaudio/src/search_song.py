@@ -17,7 +17,7 @@ class SearchSong:
         
         # Initialize webdriver
         options = webdriver.firefox.options.Options()
-        for a in ['--log-level=1', '--headless']: options.add_argument(a)
+        for a in ['-headless']: options.add_argument(a)
         self.driver = webdriver.Firefox(options=options)
     
     def __call__(self, query: str):
