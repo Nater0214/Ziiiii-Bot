@@ -17,7 +17,7 @@ class SearchSong:
         
         # Initialize webdriver
         options = webdriver.ChromeOptions()
-        for a in ["--no-sandbox, --headless=new, --disable-gpu"]: options.add_argument(a)
+        for a in ["--no-sandbox", "--headless=new", "--disable-gpu"]: options.add_argument(a)
         self.driver = webdriver.Chrome(options=options)
     
     def __call__(self, query: str):
