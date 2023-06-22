@@ -1,5 +1,7 @@
 **__pycache__
+.dockerignore
 .env
 .vscode
+Dockerfile
 pytest.ini
 tests
