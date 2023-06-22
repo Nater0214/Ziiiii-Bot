@@ -16,9 +16,9 @@ class SearchSong:
         """Initialize the 'function'"""
         
         # Initialize webdriver
-        options = webdriver.firefox.options.Options()
-        options.add_argument("-headless")
-        self.driver = webdriver.Firefox(options=options)
+        options = webdriver.ChromeOptions()
+        for a in ["--no-sandbox, --headless=new, --disable-gpu"]: options.add_argument(a)
+        self.driver = webdriver.Chrome(options=options)
     
     def __call__(self, query: str):
         """Get a Kevin audio by a search query"""
