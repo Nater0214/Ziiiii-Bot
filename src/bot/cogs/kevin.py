@@ -25,11 +25,14 @@ class Kevin(commands.Cog):
     class PlaySongView(ui.View):
         """A view for playing a single song"""
         
-        def __init__(self, song_name: str) -> None:
+        def __init__(self, song_name: str, cog_self) -> None:
             """Init"""
             
             # Run super init
             super().__init__()
+            
+            # Add cog self
+            self.cog_self = cog_self
             
             # Create the button
             button = ui.Button(label="Play", style=ButtonStyle.primary)
@@ -43,23 +46,38 @@ class Kevin(commands.Cog):
         async def play_song(self, interaction: Interaction):
             """Play the song"""
             
+            # Set playing flag
+            self.cog_self.playing = True
+            
             # Send the status message
             await interaction.response.edit_message(content=f"Playing {self.song_name}", view=None)
             
             # Get the audio source
             audio_url = kmaudio.search_song(self.song_name, True)
             audio_source = FFmpegPCMAudio(audio_url, **{'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5','options': '-n'}, executable=".\\ffmpeg.exe" if os.name == "nt" else "ffmpeg")
-            await interaction.guild.voice_client.play(audio_source)
             
+            # Play the audio
+            try:
+                interaction.guild.voice_client.connect()
+                await interaction.guild.voice_client.play(audio_source)
+            except TypeError:
+                pass
+            
+            # Set playing flag
+            self.cog_self.playing = False
+    
     
     class ResultSelectView(ui.View):
         """A view for selecting a song"""
         
-        def __init__(self, query_results: list[str]) -> None:
+        def __init__(self, query_results: list[str], cog_self) -> None:
             """Init"""
             
             # Run super init
             super().__init__()
+            
+            # Add cog_self
+            self.cog_self = cog_self
             
             # Create the buttons
             for num, result in enumerate(query_results):
@@ -72,7 +90,28 @@ class Kevin(commands.Cog):
         
         # Button method
         async def play_song(self, interaction: Interaction):
+            """Play the selected song"""
+            
+            # Set playing flag
+            self.cog_self.playing = True
+            
+            # Send the status message
             await interaction.response.edit_message(content=f"Playing {self.song_nums[interaction.custom_id]}", view=None)
+            
+            # Get the audio source
+            audio_url = kmaudio.search_song(self.song_nums[interaction.custom_id], True)
+            audio_source = FFmpegPCMAudio(audio_url, **{'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5','options': '-n'}, executable=".\\ffmpeg.exe" if os.name == "nt" else "ffmpeg")
+            
+            # Play the audio
+            try:
+                interaction.guild.voice_client.connect()
+                await interaction.guild.voice_client.play(audio_source)
+            except TypeError:
+                pass
+            
+            # Set playing flag
+            self.cog_self.playing = False
+    
     
     # Commands
     @commands.slash_command(help="Search for and play a Kevin Macleod song by a query")
@@ -83,14 +122,19 @@ class Kevin(commands.Cog):
             # Join the sender's voice channel if the bot isn't already in one
             if interaction.guild.voice_client is None:
                 if interaction.user.voice is not None:
-                    vc = await interaction.user.voice.channel.connect()
+                    pass
                 else:
                     await interaction.response.send_message("You aren't in a VC dumbass")
                     return
             else:
                 if interaction.guild.voice_client.channel != interaction.user.voice.channel:
-                    await interaction.response.send_message("I'm busy rn sorry")
+                    await interaction.response.send_message("I'm busy with someone else rn sorry")
                     return
+            
+            # Check if something is already playing
+            if self.playing == True:
+                await interaction.response.send_message("I'm busy playing a song rn sorry")
+                return
             
             # Acknowledge the command
             await interaction.defer()
@@ -102,9 +146,9 @@ class Kevin(commands.Cog):
             if len(query_results) > 25:
                 await interaction.followup.send("I found too many")
             if len(query_results) > 1:
-                await interaction.followup.send("\n".join([f"I found {len(query_results)} songs:", *[f'{num}. {song}' for num, song in enumerate(query_results)]]), view=self.ResultSelectView(query_results))
+                await interaction.followup.send("\n".join([f"I found {len(query_results)} songs:", *[f'{num}. {song}' for num, song in enumerate(query_results)]]), view=self.ResultSelectView(query_results, self))
             elif len(query_results) == 1:
-                await interaction.followup.send(f"I found {query_results[0]}", view=self.PlaySongView(query_results[0]))
+                await interaction.followup.send(f"I found {query_results[0]}", view=self.PlaySongView(query_results[0], self))
             else:
                 await interaction.followup.send("I found nothing :/")
             
