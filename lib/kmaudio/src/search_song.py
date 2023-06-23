@@ -17,7 +17,7 @@ class SearchSong:
         
         # Initialize webdriver
         options = webdriver.ChromeOptions()
-        for a in ["--no-sandbox", "--headless=new", "--disable-gpu"]: options.add_argument(a)
+        for a in ["--no-sandbox", "--headless=new", "--disable-gpu", "--window-size=1920,1080"]: options.add_argument(a)
         self.driver = webdriver.Chrome(options=options)
     
     def __call__(self, query: str, download=False):
@@ -25,6 +25,9 @@ class SearchSong:
         
         # Get the music webpage
         self.driver.get("https://incompetech.com/music/royalty-free/music.html")
+        
+        # Refresh the page
+        self.driver.refresh()
         
         # Get search bar element
         search_bar_elem = self.driver.find_element(By.ID, "incompetechSearchSearchText")
