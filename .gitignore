@@ -3,5 +3,6 @@
 .env
 .vscode
 Dockerfile
+ffmpeg.exe
 pytest.ini
 tests

@@ -20,7 +20,7 @@ class SearchSong:
         for a in ["--no-sandbox", "--headless=new", "--disable-gpu"]: options.add_argument(a)
         self.driver = webdriver.Chrome(options=options)
     
-    def __call__(self, query: str):
+    def __call__(self, query: str, download=False):
         """Get a Kevin audio by a search query"""
         
         # Get the music webpage
@@ -38,7 +38,29 @@ class SearchSong:
         # Get the song names
         song_names = [elem.find_element(By.TAG_NAME, "b").text for elem in song_elems]
         
-        # Return song names
-        return song_names
+        if download:
+            # Download the song
+            # Ensure song is found
+            if query not in song_names:
+                raise ValueError("Song not found")
+            
+            # Get the song element
+            for elem in song_elems:
+                if elem.find_element(By.TAG_NAME, "b").text == query:
+                    song_elem = elem
+                    break
+            
+            # Click the song elelemt
+            song_elem.click()
+            
+            # Get the download button
+            download_button = self.driver.find_element(By.XPATH, "/html/body/div/div[2]/div[2]/div[2]/table/tbody/tr/td[1]/div/div/div[1]/a[1]")
+            
+            # Return the song link
+            return download_button.get_attribute('href')
+            
+        else:
+            # Return song names
+            return song_names
 
 search_song = SearchSong()
