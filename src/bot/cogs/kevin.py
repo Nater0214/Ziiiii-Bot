@@ -2,14 +2,12 @@
 # A cog for Kevin Macleod related commands
 
 
-# Imports
-from discord import ApplicationContext, Option, FFmpegPCMAudio
-from discord.ext import commands
-from discord import ui
-from discord import ButtonStyle
-from discord import Interaction
-from discord.errors import HTTPException
 import os
+
+# Imports
+from discord import ApplicationContext, ButtonStyle, FFmpegPCMAudio, Interaction, Option, ui
+from discord.errors import HTTPException
+from discord.ext import commands
 
 from lib import kmaudio
 
