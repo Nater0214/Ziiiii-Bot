@@ -56,8 +56,8 @@ class Kevin(commands.Cog):
             
             # Play the audio
             try:
-                interaction.guild.voice_client.connect()
                 await interaction.guild.voice_client.play(audio_source)
+                interaction.guild.voice_client.disconnect()
             except TypeError:
                 pass
             
@@ -102,8 +102,8 @@ class Kevin(commands.Cog):
             
             # Play the audio
             try:
-                interaction.guild.voice_client.connect()
                 await interaction.guild.voice_client.play(audio_source)
+                interaction.guild.voice_client.disconnect()
             except TypeError:
                 pass
             
@@ -120,7 +120,7 @@ class Kevin(commands.Cog):
             # Join the sender's voice channel if the bot isn't already in one
             if interaction.guild.voice_client is None:
                 if interaction.user.voice is not None:
-                    pass
+                    interaction.user.voice.channel.connect()
                 else:
                     await interaction.response.send_message("You aren't in a VC dumbass")
                     return
