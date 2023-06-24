@@ -5,6 +5,7 @@
 # Imports
 from selenium import webdriver
 from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
 
 
 # Definitions
@@ -30,7 +31,7 @@ class SearchSong:
         self.driver.refresh()
         
         # Get search bar element
-        search_bar_elem = self.driver.find_element(By.ID, "incompetechSearchSearchText")
+        search_bar_elem = WebDriverWait(self.driver, 5).until(lambda x: x.find_element(By.ID, "incompetechSearchSearchText"))
         
         # Input the query
         search_bar_elem.send_keys(query)
@@ -53,7 +54,7 @@ class SearchSong:
                     song_elem = elem
                     break
             
-            # Click the song elelemt
+            # Click the song element
             song_elem.click()
             
             # Get the download button
