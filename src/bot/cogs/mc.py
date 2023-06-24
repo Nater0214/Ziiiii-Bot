@@ -3,9 +3,12 @@
 
 
 # Imports
+from os import getenv
+import subprocess
+
 from discord import Interaction
 from discord.ext import commands
-import subprocess
+from discord import Option
 
 
 # Definitions
@@ -13,8 +16,8 @@ class Minecraft(commands.Cog):
     """Minecraft commands"""
     
     # Commands
-    @commands.slash_command(help="Starts a minecraft server")
-    async def startmc(self, interaction: Interaction, server: str):
+    @commands.slash_command(help="Starts a minecraft server", guild_ids=[getenv("GUILD_ID")])
+    async def startmc(self, interaction: Interaction, server: Option(str)):
         """Starts a minecraft server"""
         
         # Check for valid server name
@@ -30,7 +33,7 @@ class Minecraft(commands.Cog):
             subprocess.Popen(["/var/mc-servers/blox_smp_1/run.sh", "y"])
     
     
-    @commands.slash_command(help="Lists all minecraft servers")
+    @commands.slash_command(help="Lists all minecraft servers", guild_ids=[getenv("GUILD_ID")])
     async def listmc(self, interaction: Interaction):
         """Lists all minecraft servers"""
         

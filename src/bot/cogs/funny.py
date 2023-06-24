@@ -3,11 +3,10 @@
 
 
 # Imports
+from os import getenv
+
 from discord import Interaction
 from discord.ext import commands
-from ytmusicapi import ytmusic
-
-YTMusic = ytmusic.YTMusic()
 
 
 # Definitions
@@ -15,7 +14,7 @@ class Funny(commands.Cog):
     """Funny commands"""
     
     # Commands
-    @commands.slash_command(help="Play a random Kevin Macleod song")
+    @commands.slash_command(help="Play a random Kevin Macleod song", guild_ids=[getenv("GUILD_ID")])
     async def rkm(self, interaction: Interaction):
         """Play a random Kevin Macleod song"""
         

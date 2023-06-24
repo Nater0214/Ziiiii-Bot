@@ -22,7 +22,7 @@ def run() -> None:
     intents.presences = False
     
     # Create bot
-    bot = commands.Bot(command_prefix="z!", intents=intents,)
+    bot = commands.Bot(intents=intents)
     
     # Add loop event
     @bot.event
@@ -33,4 +33,5 @@ def run() -> None:
     bot.load_extension("src.bot.cogs")
     
     # Run the bot
+    print("Starting the bot")
     bot.run(environ.get("BOT_TOKEN"))
