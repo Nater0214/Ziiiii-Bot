@@ -120,7 +120,7 @@ class Kevin(commands.Cog):
             # Join the sender's voice channel if the bot isn't already in one
             if interaction.guild.voice_client is None:
                 if interaction.user.voice is not None:
-                    interaction.user.voice.channel.connect()
+                    await interaction.user.voice.channel.connect()
                 else:
                     await interaction.response.send_message("You aren't in a VC dumbass")
                     return
