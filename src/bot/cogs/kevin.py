@@ -57,9 +57,11 @@ class Kevin(commands.Cog):
             # Play the audio
             try:
                 await interaction.guild.voice_client.play(audio_source)
-                interaction.guild.voice_client.disconnect()
             except TypeError:
                 pass
+            
+            # Disconnect from the channel
+            interaction.guild.voice_client.disconnect()
             
             # Set playing flag
             self.cog_self.playing = False
@@ -103,9 +105,11 @@ class Kevin(commands.Cog):
             # Play the audio
             try:
                 await interaction.guild.voice_client.play(audio_source)
-                interaction.guild.voice_client.disconnect()
             except TypeError:
                 pass
+            
+            # Disconnect from the channel
+            interaction.guild.voice_client.disconnect()
             
             # Set playing flag
             self.cog_self.playing = False
