@@ -92,7 +92,7 @@ class Kevin(Cog):
     
     # Commands
     @command_group.command(help="Search for and play a Kevin Macleod song by a query", guild_only=True)
-    async def play(self, interaction: ApplicationContext, query: Option(str, description="The query used to find the song")):
+    async def search(self, interaction: ApplicationContext, query: Option(str, description="The query used to find the song")):
         """Play a Kevin Macleod song by a query"""
         
         try:
