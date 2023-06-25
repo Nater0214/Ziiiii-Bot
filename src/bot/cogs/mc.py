@@ -3,16 +3,15 @@
 
 
 # Imports
-from os import getenv
 import subprocess
+from os import getenv
 
-from discord import Interaction
-from discord.ext.commands import slash_command
-from discord import Option, SlashCommandGroup
+from discord import Interaction, Option, SlashCommandGroup
+from discord.ext.commands import Cog
 
 
 # Definitions
-class Minecraft(commands.Cog):
+class Minecraft(Cog):
     """Minecraft commands"""
     
     # Command group
