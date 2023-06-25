@@ -5,19 +5,18 @@
 # Imports
 import os
 
-from discord import ApplicationContext, ButtonStyle, FFmpegPCMAudio, Interaction, Option, ui
-from discord.ext import commands
+from discord import ApplicationContext, ButtonStyle, FFmpegPCMAudio, Interaction, Option, SlashCommandGroup, ui
+from discord.ext.commands import Cog
 
 from lib import kmaudio
-from os import getenv
 
 
 # Definitions
-class Kevin(commands.Cog):
+class Kevin(Cog):
     """Kevin Macleod commands"""
     
-    # Playing value
-    playing = False
+    # Command group
+    command_group = SlashCommandGroup("kevin", "Kevin Macleod commands")
     
     # Views
     class PlaySongView(ui.View):
@@ -92,8 +91,8 @@ class Kevin(commands.Cog):
     
     
     # Commands
-    @commands.slash_command(help="Search for and play a Kevin Macleod song by a query", guild_only=True)
-    async def pkm(self, interaction: ApplicationContext, query: Option(str)):
+    @command_group.command(help="Search for and play a Kevin Macleod song by a query", guild_only=True)
+    async def play(self, interaction: ApplicationContext, query: Option(str, description="The query used to find the song")):
         """Play a Kevin Macleod song by a query"""
         
         try:

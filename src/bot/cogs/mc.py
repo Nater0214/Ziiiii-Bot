@@ -3,21 +3,23 @@
 
 
 # Imports
-from os import getenv
 import subprocess
+from os import getenv
 
-from discord import Interaction
-from discord.ext import commands
-from discord import Option
+from discord import Interaction, Option, SlashCommandGroup
+from discord.ext.commands import Cog
 
 
 # Definitions
-class Minecraft(commands.Cog):
+class Minecraft(Cog):
     """Minecraft commands"""
     
+    # Command group
+    command_group = SlashCommandGroup("mc", "Minecraft commands", guild_ids=[getenv("GUILD_ID")])
+    
     # Commands
-    @commands.slash_command(help="Starts a minecraft server", guild_ids=[getenv("GUILD_ID")])
-    async def startmc(self, interaction: Interaction, server: Option(str)):
+    @command_group.command(help="Starts a minecraft server", guild_ids=[getenv("GUILD_ID")], guild_only=True)
+    async def start(self, interaction: Interaction, server: Option(str, description="The server to start")):
         """Starts a minecraft server"""
         
         # Check for valid server name
@@ -33,8 +35,8 @@ class Minecraft(commands.Cog):
             subprocess.Popen(["/var/mc-servers/blox_smp_1/run.sh", "y"])
     
     
-    @commands.slash_command(help="Lists all minecraft servers", guild_ids=[getenv("GUILD_ID")])
-    async def listmc(self, interaction: Interaction):
+    @command_group.command(help="Lists all minecraft servers", guild_ids=[getenv("GUILD_ID")], guild_only=True)
+    async def list(self, interaction: Interaction):
         """Lists all minecraft servers"""
         
         await interaction.response.send_message("All Minecraft Servers:\n `blox-smp`: The Blox SMP\nThats it lol")
