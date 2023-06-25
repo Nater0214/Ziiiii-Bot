@@ -19,7 +19,7 @@ class Minecraft(Cog):
     
     # Commands
     @command_group.command(help="Starts a minecraft server", guild_ids=[getenv("GUILD_ID")], guild_only=True)
-    async def start(self, interaction: Interaction, server: Option(str)):
+    async def start(self, interaction: Interaction, server: Option(str, description="The server to start")):
         """Starts a minecraft server"""
         
         # Check for valid server name
