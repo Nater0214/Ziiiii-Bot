@@ -19,13 +19,8 @@ class Minecraft(Cog):
     
     # Commands
     @command_group.command(help="Starts a minecraft server", guild_ids=[getenv("GUILD_ID")], guild_only=True)
-    async def start(self, ctx: ApplicationContext, server: Option(str, description="The server to start")):
+    async def start(self, ctx: ApplicationContext, server: Option(str, description="The server to start", choices=["blox-smp"])):
         """Starts a minecraft server"""
-        
-        # Check for valid server name
-        if not server in ["blox-smp"]:
-            await ctx.response.send_message("Invalid server name")
-            return
         
         # Send status message
         await ctx.response.send_message(f"Starting minecraft server {server}...")
