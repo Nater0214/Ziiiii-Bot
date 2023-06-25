@@ -6,7 +6,7 @@
 from os import getenv
 from random import choice
 
-from discord import Interaction
+from discord import ApplicationContext
 from discord.ext import commands
 
 
@@ -16,7 +16,7 @@ class General(commands.Cog):
     
     # Commands
     @commands.slash_command(help="A friendly greeting", guild_ids=[getenv("GUILD_ID")])
-    async def hello(self, interaction: Interaction):
+    async def hello(self, ctx: ApplicationContext):
         """Send a friendly greeting"""
         
-        await interaction.response.send_message(choice(["Howdy {}!", "Hello {}!", "Greetings {}!"]).format(interaction.user.display_name))
+        await ctx.response.send_message(choice(["Howdy {}!", "Hello {}!", "Greetings {}!"]).format(ctx.user.display_name))
