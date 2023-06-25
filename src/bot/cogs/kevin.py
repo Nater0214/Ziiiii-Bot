@@ -5,7 +5,7 @@
 # Imports
 import os
 
-from discord import ApplicationContext, ButtonStyle, FFmpegPCMAudio, Interaction, Option, SlashCommandGroup, ui
+from discord import ApplicationContext, ButtonStyle, FFmpegPCMAudio, HTTPException, Interaction, Option, SlashCommandGroup, ui
 from discord.ext.commands import Cog
 
 from lib import kmaudio
