@@ -2,14 +2,14 @@
 # A cog for Kevin Macleod related commands
 
 
+# Imports
 import os
 
-# Imports
 from discord import ApplicationContext, ButtonStyle, FFmpegPCMAudio, Interaction, Option, ui
-from discord.errors import HTTPException
 from discord.ext import commands
 
 from lib import kmaudio
+from os import getenv
 
 
 # Definitions
@@ -50,7 +50,7 @@ class Kevin(commands.Cog):
             
             # Play the audio
             try:
-                await interaction.guild.voice_client.play(audio_source, after=lambda e: await interaction.guild.voice_client.disconnect())
+                await interaction.guild.voice_client.play(audio_source)
             except TypeError:
                 pass
     
@@ -86,21 +86,18 @@ class Kevin(commands.Cog):
             
             # Play the audio
             try:
-                await interaction.guild.voice_client.play(audio_source, after=lambda e: await interaction.guild.voice_client.disconnect())
+                await interaction.guild.voice_client.play(audio_source)
             except TypeError:
                 pass
     
     
     # Commands
-    @commands.slash_command(help="Search for and play a Kevin Macleod song by a query")
+    @commands.slash_command(help="Search for and play a Kevin Macleod song by a query", guild_only=True)
     async def pkm(self, interaction: ApplicationContext, query: Option(str)):
         """Play a Kevin Macleod song by a query"""
         
         try:
             # Check if something is already playing
-            if interaction.guild.voice_client.is_playing():
-                await interaction.response.send_message("I'm busy playing a song rn sorry")
-                return
             
             # Join the sender's voice channel if the bot isn't already in one
             if interaction.guild.voice_client is None:
@@ -110,7 +107,10 @@ class Kevin(commands.Cog):
                     await interaction.response.send_message("You aren't in a VC dumbass")
                     return
             else:
-                if interaction.guild.voice_client.channel != interaction.user.voice.channel:
+                if interaction.guild.voice_client.is_playing():
+                    await interaction.response.send_message("I'm busy playing a song rn sorry")
+                    return
+                elif interaction.guild.voice_client.channel != interaction.user.voice.channel:
                     await interaction.response.send_message("I'm busy with someone else rn sorry")
                     return
             
