@@ -5,7 +5,7 @@
 # Imports
 from os import environ
 
-from discord import Intents
+from discord import Intents, Activity, ActivityType
 from discord.ext import commands
 
 from .src import main_loop
@@ -22,7 +22,8 @@ def run() -> None:
     intents.presences = False
     
     # Create bot
-    bot = commands.Bot(intents=intents)
+    bot = commands.Bot(intents=intents, help_command=None)
+    bot.activity = Activity(type=ActivityType.watching, name="Backflipblox")
     
     # Add loop event
     @bot.event
