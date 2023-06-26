@@ -18,6 +18,7 @@ class Kevin(Cog):
     # Command group
     command_group = SlashCommandGroup("kevin", "Kevin Macleod commands", guild_ids=[os.getenv("GUILD_ID")])
     
+    
     # Views
     class PlaySongView(ui.View):
         """A view for playing a single song"""

@@ -17,8 +17,9 @@ class Minecraft(Cog):
     # Command group
     command_group = SlashCommandGroup("mc", "Minecraft commands", guild_ids=[getenv("GUILD_ID")])
     
+    
     # Commands
-    @command_group.command(help="Starts a minecraft server", guild_only=True)
+    @command_group.command(guild_only=True)
     async def start(self, ctx: ApplicationContext, server: Option(str, description="The server to start", choices=["blox-smp"])):
         """Starts a minecraft server"""
         
@@ -30,7 +31,7 @@ class Minecraft(Cog):
             subprocess.Popen(["/var/mc-servers/blox_smp_1/run.sh", "y"])
     
     
-    @command_group.command(help="Lists all minecraft servers", guild_only=True)
+    @command_group.command(guild_only=True)
     async def list(self, ctx: ApplicationContext):
         """Lists all minecraft servers"""
         
