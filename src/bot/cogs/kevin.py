@@ -48,7 +48,7 @@ class Kevin(Cog):
             audio_source = FFmpegPCMAudio(audio_url, **{'before_options': '-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5','options': '-n'}, executable=".\\ffmpeg.exe" if os.name == "nt" else "ffmpeg")
             
             # Play the audio
-            await interaction.guild.voice_client.play(audio_source)
+            interaction.guild.voice_client.play(audio_source)
     
     
     class ResultSelectView(ui.View):
@@ -129,7 +129,7 @@ class Kevin(Cog):
     
     
     @command_group.command(guild_only=True)
-    async def stop(self, ctx: ApplicationContext):
+    async def stop(self, ctx: ApplicationContext, disconnect: Option(bool, description="Wether I should disconnect from the vc") = False):
         """Stop a playing Kevin Macleod Song"""
         
         # Do stuff based on voice state
@@ -138,10 +138,13 @@ class Kevin(Cog):
         else:
             if ctx.guild.voice_client.is_playing():
                 ctx.guild.voice_client.stop()
-                await ctx.guild.voice_client.disconnect()
-                await ctx.response.send_message("Bye")
+                if disconnect:
+                    await ctx.guild.voice_client.disconnect()
+                    await ctx.response.send_message("Bye")
+                else:
+                    await ctx.response.send_message("Stopped")
             elif ctx.guild.voice_client.channel != ctx.user.voice.channel:
                 await ctx.response.send_message("You're in a different vc!")
-            else:
+            elif disconnect:
                 await ctx.guild.voice_client.disconnect()
                 await ctx.response.send_message("Bye")
