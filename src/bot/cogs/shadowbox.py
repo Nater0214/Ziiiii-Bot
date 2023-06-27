@@ -31,8 +31,8 @@ class Shadowbox(Cog):
             # Add buttons
             self.up_button = ui.Button(label="⬆️", style=ButtonStyle.gray)
             self.down_button = ui.Button(label="⬇️", style=ButtonStyle.gray)
-            self.left_button = ui.Button(label="➡️", style=ButtonStyle.gray)
-            self.right_button = ui.Button(label="⬅️", style=ButtonStyle.gray)
+            self.left_button = ui.Button(label="⬅️", style=ButtonStyle.gray)
+            self.right_button = ui.Button(label="➡️", style=ButtonStyle.gray)
             
             self.up_button.callback = self.up
             self.down_button.callback = self.down
@@ -165,11 +165,7 @@ class Shadowbox(Cog):
                 self.challenger_move = None
                 self.opponent_move = None
             
-            await interaction.response.edit_message(content=f"{'⬛' if self.challenger_move is None else '🟨'}{'🥊' if self.boxing == self.challenger else '💨'}{self.challenger.mention} {'🟩' if self.score <= -3 else '⬛'}{'🟩' if self.score <= -2 else '⬛'}{'🟩' if self.score <= -1 else '⬛'}⏹{'🟩' if self.score >= 1 else '⬛'}{'🟩' if self.score >= 2 else '⬛'}{'🟩' if self.score >= 3 else '⬛'} {self.opponent.mention}{'🥊' if self.boxing == self.opponent else '💨'}{'⬛' if self.opponent_move is None else '🟨'}", view=self)
-            if self.score == -3:
-                await interaction.response.edit_message(content=f"{interaction.message.content}\n{self.challenger.mention} won 🏆", view=None)
-            elif self.score == 3:
-                await interaction.response.edit_message(content=f"{interaction.message.content}\n{self.opponent.mention} won 🏆", view=None)
+            await interaction.response.edit_message(content=f"{'⬛' if self.challenger_move is None else '🟨'}{'🥊' if self.boxing == self.challenger else '💨'}{self.challenger.mention} {'🟩' if self.score <= -3 else '⬛'}{'🟩' if self.score <= -2 else '⬛'}{'🟩' if self.score <= -1 else '⬛'}⏹{'🟩' if self.score >= 1 else '⬛'}{'🟩' if self.score >= 2 else '⬛'}{'🟩' if self.score >= 3 else '⬛'} {self.opponent.mention}{'🥊' if self.boxing == self.opponent else '💨'}{'⬛' if self.opponent_move is None else '🟨'}", view=self if self.score not in [-3, 3] else None)
     
     
     class AcceptView(ui.View):
