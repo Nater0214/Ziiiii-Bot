@@ -30,7 +30,7 @@ class Kevin(Cog):
             super().__init__()
             
             # Create the button
-            button = ui.Button(label="Play", style=ButtonStyle.primary)
+            button = ui.Button(label="Play", style=ButtonStyle.blurple)
             button.callback = self.play_song
             self.add_item(button)
             
@@ -63,7 +63,7 @@ class Kevin(Cog):
             
             # Create the buttons
             for num, result in enumerate(query_results):
-                button = ui.Button(label=str(num + 1), style=ButtonStyle.primary, custom_id=str(num))
+                button = ui.Button(label=str(num + 1), style=ButtonStyle.blurple, custom_id=str(num))
                 button.callback = self.play_song
                 self.add_item(button)
             
