@@ -25,6 +25,7 @@ class SearchSong:
     
     # Call method
     def __call__(self, source: str, query: str):
+        """Search for a song from a source"""
         
         match source:
             case "kevin":
