@@ -48,7 +48,6 @@ class SearchSong:
                 download_links = []
                 
                 # Get the download links
-                # Get the song elements
                 for elem in song_elems:
                     # Click the song element
                     elem.click()
