@@ -5,7 +5,7 @@
 # Imports
 from os import environ
 
-from discord import Intents, Activity, ActivityType
+from discord import Intents, Activity, ActivityType, Member, VoiceState
 from discord.ext import commands
 
 from .src import main_loop
@@ -29,6 +29,13 @@ def run() -> None:
     @bot.event
     async def on_ready() -> None:
         main_loop()
+    
+    # Add voice event
+    @bot.event
+    async def on_voice_state_update(member: Member, before: VoiceState, after: VoiceState) -> None:
+        if member.id != 1110972509572050985:
+            if after.channel is None:
+                await member.guild.voice_client.disconnect()
     
     # Add cogs
     bot.load_extension("src.bot.cogs")
