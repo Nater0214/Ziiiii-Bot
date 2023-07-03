@@ -195,7 +195,7 @@ class Shadowbox(Cog):
             self.up_button = ui.Button(label=self.emoji_map["up"], style=ButtonStyle.gray)
             self.down_button = ui.Button(label=self.emoji_map["down"], style=ButtonStyle.gray)
             self.left_button = ui.Button(label=self.emoji_map["left"], style=ButtonStyle.gray)
-            self.right_button = ui.Button(label=self.emoji_map["rightself.emoji_map["], style=But]tonStyle.gray)
+            self.right_button = ui.Button(label=self.emoji_map["right"], style=ButtonStyle.gray)
             
             self.up_button.callback = self.up
             self.down_button.callback = self.down
