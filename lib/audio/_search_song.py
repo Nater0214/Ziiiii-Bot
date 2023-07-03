@@ -3,12 +3,11 @@
 
 
 # Imports
+from naters_utils.functions import MatchCall
 from selenium import webdriver
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
-
-from naters_utils.functions import MatchCall
 
 
 # Definitions
