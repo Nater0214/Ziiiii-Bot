@@ -94,7 +94,7 @@ class Music(Cog):
     async def search(self, ctx: ApplicationContext, source: Option(str, choices=["kevin", "ncs"]), query: Option(str, description="The query used to find the song")):
         """Play a song from a source by a query"""
         
-        try:            
+        try:
             # Do stuff based on voice state
             if ctx.guild.voice_client is None:
                 if ctx.user.voice is not None:
