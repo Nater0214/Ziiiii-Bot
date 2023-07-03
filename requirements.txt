@@ -1,3 +1,4 @@
+naters-utils
 py-cord[voice]
 python-dotenv
 selenium
