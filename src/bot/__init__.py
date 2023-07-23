@@ -33,9 +33,14 @@ def run() -> None:
     # Add voice event
     @bot.event
     async def on_voice_state_update(member: Member, before: VoiceState, after: VoiceState) -> None:
-        if member.id != 1110972509572050985:
+        if member.id != bot.user.id:
             if after.channel is None:
                 await member.guild.voice_client.disconnect()
+    
+    # Add member join event
+    @bot.event
+    async def on_member_join(member: Member) -> None:
+        await member.add_roles(member.guild.get_role(861297983320227850))
     
     # Add cogs
     bot.load_extension("src.bot.cogs")
