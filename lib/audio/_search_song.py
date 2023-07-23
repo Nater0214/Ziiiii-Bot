@@ -5,7 +5,7 @@
 # Imports
 from naters_utils.functions import MatchCall
 from selenium import webdriver
-from selenium.common.exceptions import TimeoutException
+from selenium.common.exceptions import TimeoutException, WebDriverException
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 
@@ -60,7 +60,7 @@ class SearchSong:
         
         # Return results
         return song_names, download_links
-        
+    
     @__call__.case()
     def ncs(self, query: str) -> tuple[list[str], list[str]]:
         # Get the music webpage
@@ -82,5 +82,15 @@ class SearchSong:
             
             # Return results
             return song_names, download_links
+    
+    @__call__.case()
+    def url(self, query: str) -> tuple[list[str], list[str]]:
+        # Get the audio source
+        try:
+            self.driver.get(query)
+        except WebDriverException:
+            return [], []
+        else:
+            return [query], [query]
 
 search_song = SearchSong()

@@ -91,7 +91,7 @@ class Music(Cog):
     
     # Commands
     @command_group.command(guild_only=True)
-    async def search(self, ctx: ApplicationContext, source: Option(str, choices=["kevin", "ncs"], description="The source of the song"), query: Option(str, description="The query used to find the song")):
+    async def search(self, ctx: ApplicationContext, source: Option(str, choices=["kevin", "ncs", "url"], description="The source of the song"), query: Option(str, description="The query used to find the song")):
         """Play a song from a source by a query"""
         
         try:
