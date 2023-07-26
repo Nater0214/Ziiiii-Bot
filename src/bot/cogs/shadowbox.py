@@ -218,7 +218,7 @@ class Shadowbox(Cog):
             self.score = 0
             
             self.challenger_move = None
-            opponent_move = None
+            self.opponent_move = None
             self.moves = []
         
         
@@ -230,7 +230,7 @@ class Shadowbox(Cog):
             if interaction.user == self.challenger:
                 self.challenger_move = "up"
             elif interaction.user == self.opponent:
-                opponent_move = "up"
+                self.opponent_move = "up"
             else:
                 await interaction.user.send(f"{interaction.message.jump_url}\n>>>You aren't in this game goofy")
                 return
@@ -245,7 +245,7 @@ class Shadowbox(Cog):
             if interaction.user == self.challenger:
                 self.challenger_move = "down"
             elif interaction.user == self.opponent:
-                opponent_move = "down"
+                self.opponent_move = "down"
             else:
                 await interaction.user.send(f"{interaction.message.jump_url}\n>>>You aren't in this game goofy")
                 return
@@ -260,7 +260,7 @@ class Shadowbox(Cog):
             if interaction.user == self.challenger:
                 self.challenger_move = "left"
             elif interaction.user == self.opponent:
-                opponent_move = "left"
+                self.opponent_move = "left"
             else:
                 await interaction.user.send(f"{interaction.message.jump_url}\n>>>You aren't in this game goofy")
                 return
@@ -275,7 +275,7 @@ class Shadowbox(Cog):
             if interaction.user == self.challenger:
                 self.challenger_move = "right"
             elif interaction.user == self.opponent:
-                opponent_move = "right"
+                self.opponent_move = "right"
             else:
                 await interaction.user.send(f"{interaction.message.jump_url}\n>>>You aren't in this game goofy")
                 return
@@ -288,12 +288,12 @@ class Shadowbox(Cog):
             """Do scoring"""
             
             # Check if both players have made a move
-            if self.challenger_move is None or opponent_move is None:
+            if self.challenger_move is None or self.opponent_move is None:
                 pass
             
             else:
                 # Check if moves are the same
-                if self.challenger_move == opponent_move:
+                if self.challenger_move == self.opponent_move:
                     # Change score accordingly
                     if self.boxing == self.challenger:
                         self.score -= 1
@@ -301,7 +301,7 @@ class Shadowbox(Cog):
                         self.score += 1
                     
                     # Add to moves list
-                    self.moves
+                    self.moves.append(self.challenger_move)
                     
                     # Disable button
                     match self.challenger_move:
@@ -334,9 +334,9 @@ class Shadowbox(Cog):
                 
                 # Reset player moves
                 self.challenger_move = None
-                opponent_move = None
+                self.opponent_move = None
             
-            await interaction.response.edit_message(content=f"{'⬛' if self.challenger_move is None else '🟨'}{'🥊' if self.boxing == self.challenger else '💨'}{self.challenger.mention} {self.emoji_map[self.moves[2]] if self.score <= -3 else '⬛'}{self.emoji_map[self.moves[1]] if self.score <= -2 else '⬛'}{self.emoji_map[self.moves[0]] if self.score <= -1 else '⬛'}{self.emoji_map[self.moves[0]] if self.score <= -1 else '⬛'}⏹{self.emoji_map[self.moves[0]] if self.score >= 1 else '⬛'}{self.emoji_map[self.moves[1]] if self.score >= 2 else '⬛'}{self.emoji_map[self.moves[2]] if self.score >= 3 else '⬛'} {self.opponent.mention}{'🥊' if self.boxing == self.opponent else '💨'}{'⬛' if opponent_move is None else '🟨'}", view=self if self.score not in [-3, 3] else None)
+            await interaction.response.edit_message(content=f"{'⬛' if self.challenger_move is None else '🟨'}{'🥊' if self.boxing == self.challenger else '💨'}{self.challenger.mention} {self.emoji_map[self.moves[2]] if self.score <= -3 else '⬛'}{self.emoji_map[self.moves[1]] if self.score <= -2 else '⬛'}{self.emoji_map[self.moves[0]] if self.score <= -1 else '⬛'}⏹{self.emoji_map[self.moves[0]] if self.score >= 1 else '⬛'}{self.emoji_map[self.moves[1]] if self.score >= 2 else '⬛'}{self.emoji_map[self.moves[2]] if self.score >= 3 else '⬛'} {self.opponent.mention}{'🥊' if self.boxing == self.opponent else '💨'}{'⬛' if self.opponent_move is None else '🟨'}", view=self if self.score not in [-3, 3] else None)
     
     
     class AcceptView(ui.View):
