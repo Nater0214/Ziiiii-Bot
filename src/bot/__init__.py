@@ -3,12 +3,12 @@
 
 
 # Imports
+import os
 from os import environ
+import asyncio
 
-from discord import Intents, Activity, ActivityType, Member, VoiceState
+from discord import Activity, ActivityType, FFmpegPCMAudio, Intents, Member, VoiceState
 from discord.ext import commands
-
-from .src import main_loop
 
 
 # Definitions
@@ -25,17 +25,14 @@ def run() -> None:
     bot = commands.Bot(intents=intents, help_command=None)
     bot.activity = Activity(type=ActivityType.watching, name="Backflipblox")
     
-    # Add loop event
-    @bot.event
-    async def on_ready() -> None:
-        main_loop()
-    
     # Add voice event
     @bot.event
     async def on_voice_state_update(member: Member, before: VoiceState, after: VoiceState) -> None:
         if member.id != bot.user.id:
+            # Leave voice channel if no one is in it
             if after.channel is None:
-                await member.guild.voice_client.disconnect()
+                if before.channel.members is None:
+                    await member.guild.voice_client.disconnect()
     
     # Add member join event
     @bot.event
